@@ -815,6 +815,7 @@ export default class APlayer extends Vue.Component<
       >
         <Player
           notice={notice}
+          fixed={fixed}
           onSkipBack={this.handleSkipBack}
           onSkipForward={this.handleSkipForward}
           onTogglePlay={this.handleTogglePlay}

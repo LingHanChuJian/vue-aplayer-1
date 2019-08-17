@@ -37,10 +37,10 @@ export default class Lyric extends Vue.Component<LyricProps> {
     return !currentMusic.id
       ? '(ಗ ‸ ಗ ) 未加载音频'
       : this.isLoading
-      ? '(*ゝω・) 少女祈祷中..'
-      : this.lrc
-      ? '(・∀・*) 抱歉，该歌词格式不支持'
-      : '(,,•́ . •̀,,) 抱歉，当前歌曲暂无歌词';
+        ? '(*ゝω・) 少女祈祷中..'
+        : this.lrc
+          ? '(・∀・*) 抱歉，该歌词格式不支持'
+          : '(,,•́ . •̀,,) 抱歉，当前歌曲暂无歌词';
     /* eslint-enable no-nested-ternary */
   }
 
@@ -162,7 +162,7 @@ export default class Lyric extends Vue.Component<LyricProps> {
           {parsed.length > 0 ? (
             parsed.map((item, index) => (
               <p
-                key={item.time}
+                key={index}
                 class={classNames({
                   'aplayer-lrc-current': current.time === item.time,
                 })}
@@ -171,8 +171,8 @@ export default class Lyric extends Vue.Component<LyricProps> {
               </p>
             ))
           ) : (
-            <p class="aplayer-lrc-current">{noLyric}</p>
-          )}
+              <p class="aplayer-lrc-current">{noLyric}</p>
+            )}
         </div>
       </div>
     );

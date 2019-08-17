@@ -15,21 +15,35 @@ export interface Notice {
 
 export interface PlayerProps {
   notice?: Notice;
+  fixed?: boolean;
 }
 
 @Component
 export default class Player extends Vue.Component<
-  PlayerProps,
-  ControllerEvents
+PlayerProps,
+ControllerEvents
 > {
   @Prop({ type: Object, required: true })
   private readonly notice!: Notice;
 
+  @Prop({ type: Boolean, required: false, default: false })
+  private readonly fixed!: Boolean;
+
   @Inject()
   private readonly aplayer!: { media: APlayer.Media };
 
+  private isPlayAction: Boolean = true
+
   private get playIcon(): string {
     return this.aplayer.media.paused ? 'play' : 'pause';
+  }
+
+  private get action(): string {
+    return this.isPlayAction ? 'aplayer-body-action' : '';
+  }
+
+  private get isPlayShow(): string {
+    return this.fixed ? this.action : ''
   }
 
   @Provide()
@@ -78,6 +92,7 @@ export default class Player extends Vue.Component<
   }
 
   private handleMiniSwitcher() {
+    this.isPlayAction = !this.isPlayAction
     this.$emit('miniSwitcher');
   }
 
@@ -85,7 +100,7 @@ export default class Player extends Vue.Component<
     const { playIcon, notice } = this;
 
     return (
-      <div class="aplayer-body">
+      <div class={`aplayer-body ${this.isPlayShow}`}>
         <Cover onClick={this.handleTogglePlay}>
           <div class={`aplayer-button aplayer-${playIcon}`}>
             <Icon type={playIcon} />

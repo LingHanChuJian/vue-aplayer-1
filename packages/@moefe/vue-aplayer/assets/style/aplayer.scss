@@ -104,17 +104,24 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
       z-index: 99;
       background: #fff;
       padding-right: 18px;
-      transition: width 0.3s ease;
+      transition: all 0.3s ease;
       max-width: 400px;
       width: calc(100% - 18px);
+    }
+
+    .aplayer-body-action {
+      transform: translateX(-66px);
+
+      &:hover {
+        transform: translateX(0)
+      }
     }
 
     .aplayer-lrc {
       display: block;
       position: fixed;
       bottom: 10px;
-      left: 0;
-      right: 0;
+      right: 50px;
       margin: 0;
       z-index: 98;
       pointer-events: none;
